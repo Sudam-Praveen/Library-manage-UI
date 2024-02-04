@@ -32,12 +32,26 @@ export class ViewAllBooksComponent {
   }
 
   removeBook(){
-    this.http.delete("http://localhost:8080/student/" + this.selectedBook.id)
+    this.http.delete(`http://localhost:8080/book/delete/${this.selectedBook.id}`,{ responseType: 'text' })
     .subscribe(data => {
       console.log(data);
-      this.loadBooks();
+      
       this.selectedBook=null;
-    })
+      this.loadBooks();
+      
+    }, error => {
+      console.error("Error deleting book:", error);
+  })
+  }
+
+  updateBook() {
+
+    this.http.post("http://localhost:8080/book/add", this.selectedBook)
+      .subscribe(data => {
+        console.log(data);
+        this.selectedBook=null;
+        this.loadBooks();
+      })
   }
 
 }

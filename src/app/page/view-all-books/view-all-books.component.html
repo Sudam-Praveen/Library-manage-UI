@@ -65,3 +65,59 @@
         </div>
     </div>
 </div>
+
+<!-- update modal -->
+
+<div class="modal fade" id="modalUpdate" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+    aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-body p-5 pt-0 mt-4">
+                <h3>Update Book Details</h3>
+                <form class="mt-4">
+
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-3" id="isbnInput"
+                            [(ngModel)]="selectedBook && selectedBook.isbn" [ngModelOptions]="{standalone: true}">
+                        <label for="isbnInput">ISBN</label>
+                    </div>
+                    <div class="form-floating mb-3">
+                        <input type="text" class="form-control rounded-3" id="titleInput"
+                             [(ngModel)]="selectedBook && selectedBook.title"[ngModelOptions]="{standalone: true}">
+                        <label for="titleInput">Title</label>
+                    </div>
+                    <div class="form-floating mb-0">
+                        <input type="text" class="form-control rounded-3" id="authorInput"
+                             [(ngModel)]="selectedBook && selectedBook.author" [ngModelOptions]="{standalone: true}">
+                        <label for="authorInput">Author</label>
+                    </div>
+                    <div class="form-floating mb-0">
+                      <input type="text" class="form-control rounded-3" id="categoryInput"
+                           [(ngModel)]="selectedBook && selectedBook.category" [ngModelOptions]="{standalone: true}">
+                      <label for="categoryInput">Category</label>
+                  </div>
+                  <div class="form-floating mb-0">
+                    <input type="text" class="form-control rounded-3" id="qtyInput"
+                         [(ngModel)]="selectedBook && selectedBook.qty" [ngModelOptions]="{standalone: true}">
+                    <label for="qtyInput">QTY</label>
+                </div>
+                   
+                    
+                </form>
+                
+            </div>
+            <div class="modal-footer flex-nowrap p-0 ">
+                <button type="button"
+                    class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0 border-end"
+                    data-bs-dismiss="modal" (click)="updateBook()" >
+                    <strong>Update</strong>
+                </button>
+                <button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 py-3 m-0 rounded-0"
+                    data-bs-dismiss="modal">No thanks</button>
+            </div>
+       
+
+        </div>
+    </div>
+</div>
