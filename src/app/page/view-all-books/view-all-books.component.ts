@@ -8,7 +8,7 @@ import { HttpClient } from '@angular/common/http';
 export class ViewAllBooksComponent {
   public http;
   public bookList:any ;
-
+  public selectedBook:any;
   
 
   constructor(private httpClient:HttpClient){
@@ -25,6 +25,19 @@ export class ViewAllBooksComponent {
       console.log(data);
       this.bookList=data;
     });
+  }
+
+  setSelectedBook(Book:any){
+    this.selectedBook=Book;
+  }
+
+  removeBook(){
+    this.http.delete("http://localhost:8080/student/" + this.selectedBook.id)
+    .subscribe(data => {
+      console.log(data);
+      this.loadBooks();
+      this.selectedBook=null;
+    })
   }
 
 }
