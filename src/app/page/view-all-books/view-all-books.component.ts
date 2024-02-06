@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-view-all-books',
   templateUrl: './view-all-books.component.html',
@@ -34,11 +35,16 @@ export class ViewAllBooksComponent {
   removeBook(){
     this.http.delete(`http://localhost:8080/book/delete/${this.selectedBook.id}`,{ responseType: 'text' })
     .subscribe(data => {
-      console.log(data);
+      console.log(data); 
+     
       
+      Swal.fire({
+        title: "Deleted!",
+        html: `The book <b style="color: red;">"${this.selectedBook.title}"</b>  is deleted`,
+        icon: "success"
+            });
       this.selectedBook=null;
       this.loadBooks();
-      
     }, error => {
       console.error("Error deleting book:", error);
   })
@@ -49,6 +55,11 @@ export class ViewAllBooksComponent {
     this.http.post("http://localhost:8080/book/add", this.selectedBook)
       .subscribe(data => {
         console.log(data);
+        Swal.fire({
+          title: "Updated!",
+          html: `The book <b>${this.selectedBook.title}</b> is updated`,
+          icon: "success"
+        });
         this.selectedBook=null;
         this.loadBooks();
       })
