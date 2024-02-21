@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
 @Component({
@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
   templateUrl: './view-all-books.component.html',
   styleUrl: './view-all-books.component.css'
 })
-export class ViewAllBooksComponent {
+export class ViewAllBooksComponent implements OnInit {
   public http;
   public bookList:any ;
   public selectedBook:any;
