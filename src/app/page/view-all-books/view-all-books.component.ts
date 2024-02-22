@@ -52,7 +52,7 @@ export class ViewAllBooksComponent implements OnInit {
 
   updateBook() {
 
-    this.http.post("http://localhost:8080/book/add", this.selectedBook)
+    this.http.put("http://localhost:8080/book/update", this.selectedBook)
       .subscribe(data => {
         console.log(data);
         Swal.fire({

@@ -12,6 +12,7 @@ export class ViewAllBorrowersComponent implements OnInit {
   private http;
   public allBorrowersList: any;
   public response: any;
+  public selectedBorrower: any
 
   constructor(httpClient: HttpClient) {
     this.http = httpClient;
@@ -92,11 +93,56 @@ export class ViewAllBorrowersComponent implements OnInit {
 
     }
 
+  }
+
+  setSelectedBorrower(Borrower: any) {
+    this.selectedBorrower = Borrower;
+  }
+  removeBorrower() {
+    this.http.delete(`http://localhost:8081/borrower/delete/${this.selectedBorrower.id}`, { responseType: 'text' })
+      .subscribe(data => {
+        console.log(data);
 
 
-
+        Swal.fire({
+          title: "Deleted!",
+          html: `The Borrower <b style="color: red;">"${this.selectedBorrower.firstName}"</b>  is deleted`,
+          icon: "success"
+        });
+        this.selectedBorrower = null;
+        this.loadBorrowers();
+      }, error => {
+        console.error("Error deleting book:", error);
+      })
 
   }
+
+  updateBorrower() {
+
+    if (this.selectedBorrower.contactNumber && this.selectedBorrower.contactNumber.length !== 10) {
+      Swal.fire({
+        title: "Invalid Phone Number!",
+        html: `please <b>Recheck</b> phone Number!`,
+        icon: "error"
+      });
+      console.log("Contact Number:", this.selectedBorrower.contactNumber);
+      this.loadBorrowers();
+    } else {
+
+      this.http.put("http://localhost:8081/borrower/update", this.selectedBorrower)
+        .subscribe(data => {
+          console.log(data);
+          Swal.fire({
+            title: "Updated!",
+            html: `The book <b>${this.selectedBorrower.firstName}</b> is updated`,
+            icon: "success"
+          });
+          this.selectedBorrower = null;
+          this.loadBorrowers();
+        })
+    }
+  }
+
 
 
   public searchBorrowers(key: string) {
