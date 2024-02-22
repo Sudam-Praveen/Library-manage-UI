@@ -1,11 +1,20 @@
+<nav class="navbar navbar-expand-lg navbar-dark container col-10"  style="background-color: #12620c;">
+   
+    <a class="navbar-brand text-center mx-auto" style="color:white; ">Manage Books</a>
+    
+
+</nav>
+
+
+
 <div class="table-responsive small container" >
     <div class="row">
         
-        <form class="form-inline py-4 col-10" style="margin-top: 8px;">
+        <form class="form-inline py-4 col-10" style="margin-top: 9px;">
             <input type="search" (ngModelChange)="searchBook(key.value)" #key="ngModel" ngModel name="key"
                 id="searchName" class="form-control mr-sm-2" placeholder="Search books..." required>
         </form>
-        <div class="col-2">
+        <div class="col-2 ">
             <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn mb-4 "> <img class="d-block "
                     src="../../../assets/Add-Book-512.webp" alt="" width="80" height="80"></button>
                     
@@ -138,10 +147,10 @@
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
-            <div class="modal-header">
-                <h1 class="modal-title fs-5 text-center mx-auto" id="exampleModalLabel">Add New Book</h1>
+            <div class="modal-header ">
+                <h1 class="modal-title fs-5 text-center " style="margin-left: 150px;" id="exampleModalLabel">Add New Book</h1>
 
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button (click)="clearField()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
@@ -220,7 +229,7 @@
             <div class="modal-footer">
                 <button  [disabled]="!book.isbn || !book.title || !book.author || !book.category || !book.qty"  
                (click)="addBook()" data-bs-dismiss="modal" class="w-75 btn btn-primary btn-md" type="submit">Add Book</button>
-                <button
+                <button (click)="clearField()"
                 type="button" class="btn btn-secondary w-20" data-bs-dismiss="modal">Close</button>
 
             </div>

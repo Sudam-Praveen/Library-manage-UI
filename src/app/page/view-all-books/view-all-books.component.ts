@@ -67,34 +67,55 @@ export class ViewAllBooksComponent implements OnInit {
 
 
   public book = {
-    isbn:null,
-    title:null,
-    author:null,
-    category:null,
-    qty:null
+    isbn: null,
+    title: null,
+    author: null,
+    category: null,
+    qty: null
 
 
   }
+  clearField() {
+    this.book = {
+      isbn: null,
+      title: null,
+      author: null,
+      category: null,
+      qty: null
 
+    }
+  }
   addBook() {
-    this.http.post("http://localhost:8080/book/add",this.book).subscribe(data => {
-      console.log(data);
-      Swal.fire({
-        title: "Added!",
-        html: `The book <b>${this.book.title}</b> is Addedd`,
-        icon: "success"
-      });
-      this.loadBooks();
+    this.http.post("http://localhost:8080/book/add", this.book).subscribe(data => {
+
+      if (data == null) {
+        Swal.fire({
+          title: "Available Book!",
+          html: `The book <b>${this.book.title}</b> is Available please <b>Update</b>!`,
+          icon: "error"
+        });
+      } else {
+        console.log(data);
+        Swal.fire({
+          title: "Added!",
+          html: `The book <b>${this.book.title}</b> is Addedd`,
+          icon: "success"
+        });
+        this.clearField();
+        this.loadBooks();
+      }
+
+
     })
   }
   public searchBook(key: string) {
-    console.log(key);
+
     const results: any[] = [];
     for (const book of this.bookList) {
       if (book.isbn.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || book.title.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || book.author.toLowerCase().indexOf(key.toLowerCase()) !== -1
-      || book.category.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+        || book.title.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || book.author.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || book.category.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
         results.push(book);
       }
     }
