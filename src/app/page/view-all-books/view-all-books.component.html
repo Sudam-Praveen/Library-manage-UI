@@ -1,6 +1,18 @@
-<div class="table-responsive small container">
+<div class="table-responsive small container" >
+    <div class="row">
+        
+        <form class="form-inline py-4 col-10" style="margin-top: 8px;">
+            <input type="search" (ngModelChange)="searchBook(key.value)" #key="ngModel" ngModel name="key"
+                id="searchName" class="form-control mr-sm-2" placeholder="Search books..." required>
+        </form>
+        <div class="col-2">
+            <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn mb-4 "> <img class="d-block "
+                    src="../../../assets/Add-Book-512.webp" alt="" width="80" height="80"></button>
+                    
+        </div>
+    </div>
     <h2>All Books</h2>
-    <table class="table table-striped table-sm" *ngIf="bookList">
+    <table class="table table-striped table-sm"  *ngIf="bookList">
         <thead>
             <tr>
                 <th scope="col">Book Id</th>
@@ -74,14 +86,12 @@
                 <form class="mt-4">
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-3" id="idInput"
-                        value={{selectedBook?.id}}>
+                        <input type="text" class="form-control rounded-3" id="idInput" value={{selectedBook?.id}}>
                         <label for="idInput">ID #BN</label>
                     </div>
 
                     <div class="form-floating mb-3">
-                        <input type="text" class="form-control rounded-3" id="isbnInput"
-                           value={{selectedBook?.isbn}}>
+                        <input type="text" class="form-control rounded-3" id="isbnInput" value={{selectedBook?.isbn}}>
                         <label for="isbnInput">ISBN</label>
                     </div>
                     <div class="form-floating mb-3">
@@ -120,6 +130,100 @@
             </div>
 
 
+        </div>
+    </div>
+</div>
+
+<!--Add Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5 text-center mx-auto" id="exampleModalLabel">Add New Book</h1>
+
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <div class=" container justify-content-center">
+
+                    <div class="col-md-12 col-lg-12 mx-auto">
+
+                        <form class="needs-validation" novalidate>
+                            <div class="row g-3">
+                                <div class="col-sm-4">
+                                    <label for="firstName" class="form-label">ISBN</label>
+                                    <input [(ngModel)]="book.isbn" [ngModelOptions]="{standalone: true}" type="text"
+                                        class="form-control" id="firstName" placeholder="Enter ISBN" value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid ISBN is required.
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-8">
+                                    <label for="lastName" class="form-label">Title</label>
+                                    <input [(ngModel)]="book.title" [ngModelOptions]="{standalone: true}" type="text"
+                                        class="form-control" id="lastName" placeholder="Enter Book Title" value=""
+                                        required>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid Title
+                                    </div>
+                                </div>
+
+
+                                <div class="col-5">
+                                    <label for="author" class="form-label">Author <span
+                                            class="text-body-secondary"></span></label>
+                                    <input [(ngModel)]="book.author" [ngModelOptions]="{standalone: true}" type="text"
+                                        class="form-control" id="author" placeholder="Author Name">
+                                    <div class="invalid-feedback">
+                                        Please enter a valid Author
+                                    </div>
+                                </div>
+
+                                <div class="col-5">
+                                    <label for="category" class="form-label">Category</label>
+                                    <input [(ngModel)]="book.category" [ngModelOptions]="{standalone: true}" type="text"
+                                        class="form-control" id="category" placeholder="Enter Category" required>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid Category
+                                    </div>
+                                </div>
+
+                                <div class="col-2">
+                                    <label for="qty" class="form-label">Qty <span
+                                            class="text-body-secondary"></span></label>
+                                    <input [(ngModel)]="book.qty" [ngModelOptions]="{standalone: true}" type="number"
+                                        class="form-control" id="qty" placeholder="Qty">
+                                </div>
+
+
+                            </div>
+
+
+
+                        </form>
+                    </div>
+                </div>
+
+
+                <!-- <footer class="my-1 pt-3 text-body-secondary text-center text-small">
+                    <p class="mb-1">&copy; 2017–2024 Library Management System</p>
+               
+                </footer> -->
+
+
+
+
+
+            </div>
+            <div class="modal-footer">
+                <button  [disabled]="!book.isbn || !book.title || !book.author || !book.category || !book.qty"  
+               (click)="addBook()" data-bs-dismiss="modal" class="w-75 btn btn-primary btn-md" type="submit">Add Book</button>
+                <button
+                type="button" class="btn btn-secondary w-20" data-bs-dismiss="modal">Close</button>
+
+            </div>
         </div>
     </div>
 </div>
