@@ -4,7 +4,7 @@
 
 
 </nav>
-<div class="table-responsive small container">
+<div class="table-responsive small container" data-aos="fade-up" data-aos-duration="1000">
     <div class="row">
 
         <form class="form-inline py-4 col-10" style="margin-top: 9px;">
@@ -45,12 +45,12 @@
                 <td>{{borrower.gender}}</td>
                 <td>{{borrower.contactNumber}}</td>
 
-                <td><button (click)="setSelectedBorrower(borrower)"
-                    class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                <td><button (click)="setSelectedBorrower(borrower)" class="btn btn-danger" data-bs-toggle="modal"
+                        data-bs-target="#staticBackdrop">
                         <i class="bi bi-trash3"></i>
                     </button>
-                    <button (click)="setSelectedBorrower(borrower)"
-                     class="btn btn-secondary ms-2" data-bs-toggle="modal" data-bs-target="#modalUpdate">
+                    <button (click)="setSelectedBorrower(borrower)" class="btn btn-secondary ms-2"
+                        data-bs-toggle="modal" data-bs-target="#modalUpdate">
                         <i class="bi bi-pencil-square"></i></button>
                 </td>
             </tr>
@@ -69,7 +69,8 @@
                 <h1 class="modal-title fs-5 text-center " style="margin-left: 120px;" id="exampleModalLabel">Register
                     New Borrower</h1>
 
-                <button (click)="clearFields()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button (click)="clearFields()" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
@@ -140,7 +141,7 @@
                                         </div>
                                         <div class="form-check">
                                             <input [(ngModel)]="borrower.gender" (change)="genderSelect('Female')"
-                                             id="female" name="gender" value="female" type="radio"
+                                                id="female" name="gender" value="female" type="radio"
                                                 class="form-check-input" required>
                                             <label class="form-check-label me-5" for="female">Female</label>
                                         </div>
@@ -168,8 +169,10 @@
             <div class="modal-footer">
                 <button
                     [disabled]="!borrower.firstName || !borrower.lastName || !borrower.email || !borrower.address || !borrower.doB || !borrower.gender || !borrower.contactNumber"
-                    (click)="addBorrower()"  data-bs-dismiss="modal" class="w-75 btn btn-primary btn-md" type="submit">Register</button>
-                <button (click)="clearFields()" type="button" class="btn btn-secondary w-20" data-bs-dismiss="modal">Close</button>
+                    (click)="addBorrower()" data-bs-dismiss="modal" class="w-75 btn btn-primary btn-md"
+                    type="submit">Register</button>
+                <button (click)="clearFields()" type="button" class="btn btn-secondary w-20"
+                    data-bs-dismiss="modal">Close</button>
 
             </div>
         </div>
@@ -177,7 +180,7 @@
 </div>
 
 <!-- Delete Modal  -->
- <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
     aria-labelledby="staticBackdropLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -208,10 +211,12 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h1 class="modal-title fs-5 text-center fw-bold" style="margin-left: 120px;" id="staticBackdropLabel">Update
-                     Borrower</h1>
+                <h1 class="modal-title fs-5 text-center fw-bold" style="margin-left: 120px;" id="staticBackdropLabel">
+                    Update
+                    Borrower</h1>
 
-                <button (click)="clearFields()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button (click)="clearFields()" type="button" class="btn-close" data-bs-dismiss="modal"
+                    aria-label="Close"></button>
             </div>
             <div class="modal-body">
 
@@ -223,9 +228,9 @@
                             <div class="row g-3">
                                 <div class="col-sm-6">
                                     <label for="firstName" class="form-label">First name</label>
-                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.firstName" [ngModelOptions]="{standalone: true}"
-                                        type="text" class="form-control fw-bold" id="firstName" placeholder="Enter First Name"
-                                        value="" required>
+                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.firstName"
+                                        [ngModelOptions]="{standalone: true}" type="text" class="form-control fw-bold"
+                                        id="firstName" placeholder="Enter First Name" value="" required>
                                     <div class="invalid-feedback">
                                         Valid first name is required.
                                     </div>
@@ -233,9 +238,9 @@
 
                                 <div class="col-sm-6">
                                     <label for="lastName" class="form-label">Last name</label>
-                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.lastName "[ngModelOptions]="{standalone: true}"
-                                        type="text" class="form-control fw-bold" id="lastName" placeholder="Enter Last Name"
-                                        value="" required>
+                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.lastName "
+                                        [ngModelOptions]="{standalone: true}" type="text" class="form-control fw-bold"
+                                        id="lastName" placeholder="Enter Last Name" value="" required>
                                     <div class="invalid-feedback">
                                         Valid last name is required.
                                     </div>
@@ -245,8 +250,9 @@
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span
                                             class="text-body-secondary"></span></label>
-                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.email "[ngModelOptions]="{standalone: true}"
-                                        type="email" class="form-control fw-bold" id="email" placeholder="12345@gmail.com">
+                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.email "
+                                        [ngModelOptions]="{standalone: true}" type="email" class="form-control fw-bold"
+                                        id="email" placeholder="12345@gmail.com">
                                     <div class="invalid-feedback">
                                         Please enter a valid email address for shipping updates.
                                     </div>
@@ -254,9 +260,9 @@
 
                                 <div class="col-12">
                                     <label for="address" class="form-label">Address</label>
-                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.address" [ngModelOptions]="{standalone: true}"
-                                        type="text" class="form-control fw-bold" id="address"
-                                        placeholder="123 Main Street,Panadura" required>
+                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.address"
+                                        [ngModelOptions]="{standalone: true}" type="text" class="form-control fw-bold"
+                                        id="address" placeholder="123 Main Street,Panadura" required>
                                     <div class="invalid-feedback">
                                         Please enter your shipping address.
                                     </div>
@@ -265,23 +271,24 @@
                                 <div class="col-12">
                                     <label for="address2" class="form-label">Date of Birth <span
                                             class="text-body-secondary"></span></label>
-                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.doB" [ngModelOptions]="{standalone: true}"
-                                        class="form-control fw-bold" id="address2" placeholder="YYYY-MM-DD">
+                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.doB"
+                                        [ngModelOptions]="{standalone: true}" class="form-control fw-bold" id="address2"
+                                        placeholder="YYYY-MM-DD">
                                 </div>
 
                                 <div class="col-md-6">
                                     <label for="state" class="form-label">Gender</label>
                                     <div class="d-flex justify-content-between">
                                         <div class="form-check">
-                                            <input [(ngModel)]=" selectedBorrower &&  selectedBorrower.gender" (change)="genderSelect('Male')"
-                                                id="male" name="gender" value="Male" type="radio"
-                                                class="form-check-input" checked required>
+                                            <input [(ngModel)]=" selectedBorrower &&  selectedBorrower.gender"
+                                                (change)="genderSelect('Male')" id="male" name="gender" value="Male"
+                                                type="radio" class="form-check-input" checked required>
                                             <label class="form-check-label" for="male">Male</label>
                                         </div>
                                         <div class="form-check">
-                                            <input [(ngModel)]=" selectedBorrower &&  selectedBorrower.gender"  (change)="genderSelect('Female')"
-                                             id="female" name="gender" value="Female" type="radio"
-                                                class="form-check-input" required>
+                                            <input [(ngModel)]=" selectedBorrower &&  selectedBorrower.gender"
+                                                (change)="genderSelect('Female')" id="female" name="gender"
+                                                value="Female" type="radio" class="form-check-input" required>
                                             <label class="form-check-label me-5" for="female">Female</label>
                                         </div>
                                     </div>
@@ -289,8 +296,9 @@
 
                                 <div class="col-md-6">
                                     <label for="contactNumber" class="form-label">Contact Number</label>
-                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.contactNumber" [ngModelOptions]="{standalone: true}"
-                                        type="text" class="form-control fw-bold" id="contactNumber" placeholder="" required>
+                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.contactNumber"
+                                        [ngModelOptions]="{standalone: true}" type="text" class="form-control fw-bold"
+                                        id="contactNumber" placeholder="" required>
                                     <div class="invalid-feedback">
                                         contact Number is required.
                                     </div>
@@ -304,9 +312,10 @@
 
             </div>
             <div class="modal-footer">
-                <button (click)="updateBorrower()"
-                     data-bs-dismiss="modal" class="w-75 btn btn-primary btn-md" type="submit">Update</button>
-                <button (click)="clearFields()" type="button" class="btn btn-secondary w-20" data-bs-dismiss="modal">Close</button>
+                <button (click)="updateBorrower()" data-bs-dismiss="modal" class="w-75 btn btn-primary btn-md"
+                    type="submit">Update</button>
+                <button (click)="clearFields()" type="button" class="btn btn-secondary w-20"
+                    data-bs-dismiss="modal">Close</button>
 
             </div>
         </div>

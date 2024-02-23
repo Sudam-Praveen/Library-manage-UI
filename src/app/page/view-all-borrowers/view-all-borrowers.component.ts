@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import AOS from 'aos'
 @Component({
   selector: 'app-view-all-borrowers',
   templateUrl: './view-all-borrowers.component.html',
@@ -21,6 +22,11 @@ export class ViewAllBorrowersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadBorrowers();
+    
+      AOS.init({
+        duration: 500
+      });
+
   }
 
   loadBorrowers() {
@@ -134,7 +140,7 @@ export class ViewAllBorrowersComponent implements OnInit {
           console.log(data);
           Swal.fire({
             title: "Updated!",
-            html: `The book <b>${this.selectedBorrower.firstName}</b> is updated`,
+            html: `The Borrower <b>${this.selectedBorrower.firstName}</b> is updated`,
             icon: "success"
           });
           this.selectedBorrower = null;
