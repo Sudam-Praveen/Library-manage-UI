@@ -180,7 +180,7 @@
             <div class="modal-footer">
                 <button
                     [disabled]="!borrower.firstName || !borrower.lastName || !borrower.userName || !borrower.email || !borrower.address || !borrower.doB || !borrower.gender || !borrower.contactNumber"
-                    (click)="addBorrower()" data-bs-dismiss="modal" class="w-75 btn btn-primary btn-md"
+                    (click)="isExistsBorrower()" data-bs-dismiss="modal" class="w-75 btn btn-primary btn-md"
                     type="submit">Register</button>
                 <button (click)="clearFields()" type="button" class="btn btn-secondary w-20"
                     data-bs-dismiss="modal">Close</button>
