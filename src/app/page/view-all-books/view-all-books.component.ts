@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
+import AOS from 'aos'
 @Component({
   selector: 'app-view-all-books',
   templateUrl: './view-all-books.component.html',
@@ -18,6 +19,9 @@ export class ViewAllBooksComponent implements OnInit {
   //auto calling when component loading(life cycle)
   ngOnInit(): void {
     this.loadBooks();
+    AOS.init({
+      duration: 1000
+    });
   }
 
   loadBooks() {

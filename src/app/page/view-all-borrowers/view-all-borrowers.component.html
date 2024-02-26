@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark container col-10" style="background-color: #12620c;">
+<nav class="navbar navbar-expand-lg navbar-dark container col-11" style="background-color: #12620c;">
 
     <a class="navbar-brand text-center mx-auto" style="color:white; ">Manage Borrowers</a>
 
@@ -25,8 +25,9 @@
                 <th scope="col">Reg No</th>
                 <th scope="col">First Name</th>
                 <th scope="col">Last Name</th>
-                <th scope="col">email</th>
-                <th scope="col">address</th>
+                <th scope="col">UserName</th>
+                <th scope="col">Email</th>
+                <th scope="col">Address</th>
                 <th scope="col">DoB</th>
                 <th scope="col">Gender</th>
                 <th scope="col">Contact Number</th>
@@ -36,9 +37,10 @@
         <tbody>
 
             <tr *ngFor="let borrower of allBorrowersList">
-                <td>{{borrower.registerNo}}</td>
+                <td>RN#{{borrower.id}}</td>
                 <td>{{borrower.firstName}}</td>
                 <td>{{borrower.lastName}}</td>
+                <td>{{borrower.userName}}</td>
                 <td>{{borrower.email}}</td>
                 <td>{{borrower.address}}</td>
                 <td>{{borrower.doB}}</td>
@@ -100,6 +102,15 @@
                                     </div>
                                 </div>
 
+                                <div class="col-sm-12">
+                                    <label for="lastName" class="form-label">User name</label>
+                                    <input [(ngModel)]="borrower.userName" [ngModelOptions]="{standalone: true}"
+                                        type="text" class="form-control" id="lastName" placeholder="Enter User Name"
+                                        value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid last name is required.
+                                    </div>
+                                </div>
 
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span
@@ -168,7 +179,7 @@
             </div>
             <div class="modal-footer">
                 <button
-                    [disabled]="!borrower.firstName || !borrower.lastName || !borrower.email || !borrower.address || !borrower.doB || !borrower.gender || !borrower.contactNumber"
+                    [disabled]="!borrower.firstName || !borrower.lastName || !borrower.userName || !borrower.email || !borrower.address || !borrower.doB || !borrower.gender || !borrower.contactNumber"
                     (click)="addBorrower()" data-bs-dismiss="modal" class="w-75 btn btn-primary btn-md"
                     type="submit">Register</button>
                 <button (click)="clearFields()" type="button" class="btn btn-secondary w-20"
@@ -187,7 +198,7 @@
 
             <div class="modal-body p-4 text-center">
 
-                <h5 class="mb-0"><i class="bi bi-question-square m-2"></i>Do you really want to Delete Book <br><span
+                <h5 class="mb-0"><i class="bi bi-question-square m-2"></i>Do you really want to Delete Borrower <br><span
                         style="color: red;" class="fw-bold ">"{{selectedBorrower?.firstName}}" </span>?</h5>
 
             </div>
@@ -246,6 +257,16 @@
                                     </div>
                                 </div>
 
+                                <div class="col-sm-12">
+                                    <label for="lastName" class="form-label">User name</label>
+                                    <input [(ngModel)]="selectedBorrower && selectedBorrower.userName"
+                                    [ngModelOptions]="{standalone: true}" 
+                                        type="text" class="form-control fw-bold" id="lastName" placeholder="Enter User Name"
+                                        value="" required>
+                                    <div class="invalid-feedback">
+                                        Valid user name is required.
+                                    </div>
+                                </div>
 
                                 <div class="col-12">
                                     <label for="email" class="form-label">Email <span

@@ -39,6 +39,7 @@ export class ViewAllBorrowersComponent implements OnInit {
   public borrower = {
     firstName: null,
     lastName: null,
+    userName:null,
     email: null,
     address: null,
     doB: null,
@@ -49,6 +50,7 @@ export class ViewAllBorrowersComponent implements OnInit {
     this.borrower = {
       firstName: null,
       lastName: null,
+      userName:null,
       email: null,
       address: null,
       doB: null,
@@ -87,7 +89,7 @@ export class ViewAllBorrowersComponent implements OnInit {
           this.response = data;
           Swal.fire({
             title: "Added!",
-            html: ` <b>${this.borrower.firstName}</b> is Addedd ! <br> Register Number is <b>${this.response.registerNo}</b>`,
+            html: ` <b>${this.borrower.firstName}</b> is Addedd ! <br> Register Number is <b>${this.response.id}</b>`,
             icon: "success"
           });
           this.clearFields();
