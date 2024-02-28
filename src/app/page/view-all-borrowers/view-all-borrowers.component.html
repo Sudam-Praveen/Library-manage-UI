@@ -1,3 +1,5 @@
+
+
 <nav class="navbar navbar-expand-lg navbar-dark container col-11" style="background-color: #12620c;">
 
     <a class="navbar-brand text-center mx-auto" style="color:white; ">Manage Borrowers</a>
@@ -23,8 +25,7 @@
         <thead>
             <tr>
                 <th scope="col">Reg No</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
+                <th scope="col">Name</th>
                 <th scope="col">UserName</th>
                 <th scope="col">Email</th>
                 <th scope="col">Address</th>
@@ -38,8 +39,7 @@
 
             <tr *ngFor="let borrower of allBorrowersList">
                 <td>RN#{{borrower.id}}</td>
-                <td>{{borrower.firstName}}</td>
-                <td>{{borrower.lastName}}</td>
+                <td>{{borrower.firstName+" "+borrower.lastName}}</td>
                 <td>{{borrower.userName}}</td>
                 <td>{{borrower.email}}</td>
                 <td>{{borrower.address}}</td>
