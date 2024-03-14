@@ -8,7 +8,7 @@ import { HomeComponent } from './page/home/home.component';
 
 const routes: Routes = [
   {
-    path:"",
+    path:"login",
     component:LoginComponent
   },
   {
@@ -26,6 +26,11 @@ const routes: Routes = [
   {
     path:"home",
     component:HomeComponent
+  },
+  {
+    path:"",
+    redirectTo:"login",
+    pathMatch:"full"
   }
 ];
 
