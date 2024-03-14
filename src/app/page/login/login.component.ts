@@ -53,7 +53,7 @@ export class LoginComponent {
             icon: 'success'
           }).then(() => {
             // Navigate to home component upon successful login
-            this.router.navigate(['/view-all-borrowers']);
+            this.router.navigate(['/home']);
           });
         },
           (error: any) => {
