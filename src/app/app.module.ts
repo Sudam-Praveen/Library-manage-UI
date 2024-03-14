@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './page/login/login.component';
 import { SignupComponent } from './page/signup/signup.component';
 import { ViewAllBorrowersComponent } from './page/view-all-borrowers/view-all-borrowers.component';
+import { HomeComponent } from './page/home/home.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { ViewAllBorrowersComponent } from './page/view-all-borrowers/view-all-bo
     ViewAllBooksComponent,
     LoginComponent,
     SignupComponent,
-    ViewAllBorrowersComponent
+    ViewAllBorrowersComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
