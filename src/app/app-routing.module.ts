@@ -4,10 +4,11 @@ import { LoginComponent } from './page/login/login.component';
 import { ViewAllBooksComponent } from './page/view-all-books/view-all-books.component';
 import { SignupComponent } from './page/signup/signup.component';
 import { ViewAllBorrowersComponent } from './page/view-all-borrowers/view-all-borrowers.component';
+import { HomeComponent } from './page/home/home.component';
 
 const routes: Routes = [
   {
-    path:"login",
+    path:"",
     component:LoginComponent
   },
   {
@@ -21,6 +22,10 @@ const routes: Routes = [
   {
     path:"view-all-borrowers",
     component:ViewAllBorrowersComponent
+  },
+  {
+    path:"home",
+    component:HomeComponent
   }
 ];
 

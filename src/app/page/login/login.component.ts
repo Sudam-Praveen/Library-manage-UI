@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 import AOS from 'aos'
 import Swal from 'sweetalert2';
@@ -11,8 +12,8 @@ import Swal from 'sweetalert2';
 export class LoginComponent {
 
   private http;
-  constructor(httpclient:HttpClient){
-    this.http=httpclient;
+  constructor(httpclient: HttpClient, private router: Router) {
+    this.http = httpclient;
   }
 
   ngOnInit() {
@@ -44,9 +45,27 @@ export class LoginComponent {
     } else {
 
       //check the email and pw valid from the DB
-        this.http.put('http://localhost:8080/login/check',this.admin)
+      this.http.put(`http://localhost:8080/login/check`, this.admin, { responseType: 'text' })
+        .subscribe((data: any) => {
+          Swal.fire({
+            title: 'Welcome!',
+            html: `  User `,
+            icon: 'success'
+          }).then(() => {
+            // Navigate to home component upon successful login
+            this.router.navigate(['/view-all-borrowers']);
+          });
+        },
+          (error: any) => {
+            Swal.fire({
+              title: 'Error!',
+              html: 'Invalid Login please check the email & password',
+              icon: 'error'
+            });
+          }
+        )
 
-      console.log(this.admin)
+
     }
   }
 }
