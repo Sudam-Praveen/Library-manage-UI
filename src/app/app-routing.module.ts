@@ -5,32 +5,37 @@ import { ViewAllBooksComponent } from './page/view-all-books/view-all-books.comp
 import { SignupComponent } from './page/signup/signup.component';
 import { ViewAllBorrowersComponent } from './page/view-all-borrowers/view-all-borrowers.component';
 import { HomeComponent } from './page/home/home.component';
+import { BorrowBooksComponent } from './page/borrow-books/borrow-books.component';
 
 const routes: Routes = [
   {
-    path:"login",
-    component:LoginComponent
+    path: "login",
+    component: LoginComponent
   },
   {
-    path:"view-all-books",
-    component:ViewAllBooksComponent
+    path: "view-all-books",
+    component: ViewAllBooksComponent
   },
   {
-    path:"signup",
-    component:SignupComponent
+    path: "signup",
+    component: SignupComponent
   },
   {
-    path:"view-all-borrowers",
-    component:ViewAllBorrowersComponent
+    path: "view-all-borrowers",
+    component: ViewAllBorrowersComponent
   },
   {
-    path:"home",
-    component:HomeComponent
+    path: "home",
+    component: HomeComponent
   },
   {
-    path:"",
-    redirectTo:"login",
-    pathMatch:"full"
+    path: "",
+    redirectTo: "login",
+    pathMatch: "full"
+  }, 
+  {
+    path:"borrow-books",
+    component:BorrowBooksComponent
   }
 ];
 

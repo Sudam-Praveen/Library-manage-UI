@@ -11,6 +11,7 @@ import { LoginComponent } from './page/login/login.component';
 import { SignupComponent } from './page/signup/signup.component';
 import { ViewAllBorrowersComponent } from './page/view-all-borrowers/view-all-borrowers.component';
 import { HomeComponent } from './page/home/home.component';
+import { BorrowBooksComponent } from './page/borrow-books/borrow-books.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { HomeComponent } from './page/home/home.component';
     LoginComponent,
     SignupComponent,
     ViewAllBorrowersComponent,
-    HomeComponent
+    HomeComponent,
+    BorrowBooksComponent
   ],
   imports: [
     BrowserModule,
