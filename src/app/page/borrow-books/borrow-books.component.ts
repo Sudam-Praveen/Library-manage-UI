@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵprovideZonelessChangeDetection } from '@angular/core';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,6 +12,9 @@ export class BorrowBooksComponent implements OnInit {
   public userName: string = ''
   public user: any;
 
+  public bookId: any;
+  public searchedBook: any;
+
   public borrowbook: any = {
     userID: "",
     bookId: "",
@@ -19,6 +22,8 @@ export class BorrowBooksComponent implements OnInit {
     fine: "",
     qty: ""
   }
+
+  public cartList:any=[]
 
   constructor(httpClient: HttpClient) {
     this.http = httpClient;
@@ -55,4 +60,52 @@ export class BorrowBooksComponent implements OnInit {
 
   }
 
+
+  searchBook() {
+    if (this.bookId == '' || this.bookId == null) {
+      Swal.fire({
+        title: "Invalid Input",
+        html: `Enter Book ID without <b>"#BN"<b>!`,
+        icon: "error"
+      });
+    } else {
+
+      this.http.get(`http://localhost:8080/book/search/${this.bookId}`).subscribe(data => {
+        console.log(data)
+        this.searchedBook = data;
+
+        Swal.fire({
+          title: `<b style="color: blue;">"${this.searchedBook.title}"</b> <br> Do you want to get this book?`,
+          showDenyButton: true,
+          showCancelButton: true,
+          confirmButtonText: "Yes",
+          denyButtonText: `Don't `
+        }).then((result) => {
+          /* Read more about isConfirmed, isDenied below */
+          if (result.isConfirmed) {
+            this.cartList.push(this.searchedBook)
+            this.searchedBook=null;
+            Swal.fire("Added!", "", "success");
+
+            console.log(this.cartList)
+          } else if (result.isDenied) {
+            Swal.fire("Changes are not saved", "", "info");
+          }
+        });
+
+        this.bookId = '';
+
+      }, error => {
+        Swal.fire({
+          title: "Invalid Book Id ",
+          html: `Check and Re-enter Book ID without <b>"#BN"<b> ! `,
+          icon: "error"
+        });
+      })
+    }
+
+
+  }
+
 }
+
