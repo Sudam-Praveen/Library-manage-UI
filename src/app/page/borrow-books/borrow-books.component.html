@@ -27,6 +27,7 @@
     </table>
 
     <div *ngIf="user" class="py-3">
+        <hr>
         <h2>Select Books</h2>
         <div class="input-group mb-3">
             <input [(ngModel)]="bookId" type="text" class="form-control" placeholder="Enter Book ID without #BN eg:124"
@@ -43,6 +44,7 @@
                 <th scope="col">Title</th>
                 <th scope="col">Author</th>
                 <th scope="col">Category</th>
+                <th scope="col">QTY</th>
 
             </tr>
         </thead>
@@ -53,6 +55,7 @@
                 <td>{{book.title}}</td>
                 <td>{{book.author}}</td>
                 <td>{{book.category}}</td>
+                <td>{{book.qty}}</td>
             </tr>
         </tbody>
     </table>

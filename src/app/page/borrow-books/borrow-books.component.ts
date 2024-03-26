@@ -13,7 +13,11 @@ export class BorrowBooksComponent implements OnInit {
   public user: any;
 
   public bookId: any;
-  public searchedBook: any;
+  public searchedBook: any = {};
+
+  public newSearchedBook: any = {}
+
+  public bookQty: any = 1;
 
   public borrowbook: any = {
     userID: "",
@@ -23,7 +27,7 @@ export class BorrowBooksComponent implements OnInit {
     qty: ""
   }
 
-  public cartList:any=[]
+  public cartList: any = []
 
   constructor(httpClient: HttpClient) {
     this.http = httpClient;
@@ -61,7 +65,10 @@ export class BorrowBooksComponent implements OnInit {
   }
 
 
+
+
   searchBook() {
+    
     if (this.bookId == '' || this.bookId == null) {
       Swal.fire({
         title: "Invalid Input",
@@ -74,6 +81,16 @@ export class BorrowBooksComponent implements OnInit {
         console.log(data)
         this.searchedBook = data;
 
+        this.newSearchedBook = {
+          id: this.searchedBook.id,
+          isbn: this.searchedBook.isbn,
+          title: this.searchedBook.title,
+          author: this.searchedBook.author,
+          category: this.searchedBook.category,
+          qty: 1
+
+        }
+
         Swal.fire({
           title: `<b style="color: blue;">"${this.searchedBook.title}"</b> <br> Do you want to get this book?`,
           showDenyButton: true,
@@ -83,13 +100,34 @@ export class BorrowBooksComponent implements OnInit {
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
-            this.cartList.push(this.searchedBook)
-            this.searchedBook=null;
+            let isExists = true;
+
+            if (this.cartList.length == 0) {
+              this.cartList.push(this.newSearchedBook)
+            } else {
+              var i;
+              for (i in this.cartList) {
+                if (this.cartList[i].id == this.searchedBook.id) {
+                  this.cartList[i].qty++;
+                  console.log("exists")
+                  return
+                } else {
+                  isExists = false
+                  console.log("not Exists")
+                }
+              }
+            }
+            if (isExists == false) {
+              this.cartList.push(this.newSearchedBook);
+            }
+
+
+            this.searchedBook = null;
             Swal.fire("Added!", "", "success");
 
             console.log(this.cartList)
           } else if (result.isDenied) {
-            Swal.fire("Changes are not saved", "", "info");
+            Swal.fire("The Book not added", "", "info");
           }
         });
 
