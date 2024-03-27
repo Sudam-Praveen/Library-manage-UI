@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, ɵprovideZonelessChangeDetection } from '@angular/core';
 import Swal from 'sweetalert2';
-
+import AOS from 'aos'
 @Component({
   selector: 'app-borrow-books',
   templateUrl: './borrow-books.component.html',
@@ -19,13 +19,7 @@ export class BorrowBooksComponent implements OnInit {
 
   public bookQty: any = 1;
 
-  public borrowbook: any = {
-    userID: "",
-    bookId: "",
-    Date: new Date(),
-    fine: "",
-    qty: ""
-  }
+
 
   public cartList: any = []
 
@@ -65,13 +59,11 @@ export class BorrowBooksComponent implements OnInit {
   }
 
 
-
-
   searchBook() {
-    
+
     if (this.bookId == '' || this.bookId == null) {
       Swal.fire({
-        title: "Invalid Input",
+        title: "Book Id Not Entered ",
         html: `Enter Book ID without <b>"#BN"<b>!`,
         icon: "error"
       });
@@ -143,6 +135,37 @@ export class BorrowBooksComponent implements OnInit {
     }
 
 
+  }
+//----------delete a book from cartList--------------
+
+  deleteBookItem(id:any){
+
+    const indexNum = this.cartList.findIndex((item:any) => item.id === id);
+    console.log(indexNum)
+    this.cartList.splice(indexNum, 1);
+    console.log(this.cartList);
+    
+  }
+  //-------------------borrow books------------
+
+  bookIDs: any = [];
+  loadBookIds() {
+    this.cartList.forEach((element: any) => {
+      this.bookIDs.push(element.id)
+    });
+    console.log(this.bookIDs)
+  }
+
+  borrowBooks() {
+    this.loadBookIds()
+    const borrowbook: any = {
+      borrowerID: this.user.id,
+      books: this.bookIDs,
+      Date: new Date(),
+      fine: "",
+    }
+    console.log(borrowbook);
+    
   }
 
 }
