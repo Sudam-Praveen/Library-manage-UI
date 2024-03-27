@@ -73,16 +73,6 @@ export class BorrowBooksComponent implements OnInit {
         console.log(data)
         this.searchedBook = data;
 
-        this.newSearchedBook = {
-          id: this.searchedBook.id,
-          isbn: this.searchedBook.isbn,
-          title: this.searchedBook.title,
-          author: this.searchedBook.author,
-          category: this.searchedBook.category,
-          qty: 1
-
-        }
-
         Swal.fire({
           title: `<b style="color: blue;">"${this.searchedBook.title}"</b> <br> Do you want to get this book?`,
           showDenyButton: true,
@@ -95,7 +85,7 @@ export class BorrowBooksComponent implements OnInit {
             let isExists = true;
 
             if (this.cartList.length == 0) {
-              this.cartList.push(this.newSearchedBook)
+              this.cartList.push(this.searchedBook)
             } else {
               var i;
               for (i in this.cartList) {
@@ -110,10 +100,8 @@ export class BorrowBooksComponent implements OnInit {
               }
             }
             if (isExists == false) {
-              this.cartList.push(this.newSearchedBook);
+              this.cartList.push(this.searchedBook);
             }
-
-
             this.searchedBook = null;
             Swal.fire("Added!", "", "success");
 
@@ -136,36 +124,57 @@ export class BorrowBooksComponent implements OnInit {
 
 
   }
-//----------delete a book from cartList--------------
+  //----------delete a book from cartList--------------
 
-  deleteBookItem(id:any){
+  deleteBookItem(id: any) {
 
-    const indexNum = this.cartList.findIndex((item:any) => item.id === id);
+    const indexNum = this.cartList.findIndex((item: any) => item.id === id);
     console.log(indexNum)
     this.cartList.splice(indexNum, 1);
     console.log(this.cartList);
-    
+
   }
+
   //-------------------borrow books------------
 
   bookIDs: any = [];
   loadBookIds() {
     this.cartList.forEach((element: any) => {
-      this.bookIDs.push(element.id)
+      if (element.qty == 0) {
+        Swal.fire({
+          title: "Zero QTY ",
+          html: `Books Must be returned ! `,
+          icon: "error"
+        });
+      } else {
+
+        this.bookIDs.push(element.id)
+        element.qty--;
+        //--------reduce qty when borrowing
+        this.http.put("http://localhost:8080/book/update", element)
+          .subscribe(data => {
+            console.log(data);
+          })
+      }
     });
-    console.log(this.bookIDs)
+    console.log("bookids"+this.bookIDs)
   }
 
   borrowBooks() {
     this.loadBookIds()
-    const borrowbook: any = {
+
+    const borrowBook: any = {
       borrowerID: this.user.id,
       books: this.bookIDs,
-      Date: new Date(),
+      date: new Date().toISOString().split('T')[0],
       fine: "",
     }
-    console.log(borrowbook);
-    
+
+    console.log(borrowBook);
+    this.http.post("http://localhost:8082/borrow/add-borrow-details", borrowBook).subscribe(data => {
+      console.log(data);
+    })
+
   }
 
 }
