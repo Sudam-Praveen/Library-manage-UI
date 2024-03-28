@@ -2,7 +2,7 @@
     backdrop-filter: blur(5px);
     background-color: rgb(255, 255, 255,0.5);
 }
-li{
+li,button{
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-size:medium;
 }

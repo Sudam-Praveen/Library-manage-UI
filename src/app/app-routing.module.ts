@@ -6,6 +6,7 @@ import { SignupComponent } from './page/signup/signup.component';
 import { ViewAllBorrowersComponent } from './page/view-all-borrowers/view-all-borrowers.component';
 import { HomeComponent } from './page/home/home.component';
 import { BorrowBooksComponent } from './page/borrow-books/borrow-books.component';
+import { LiveBorrowingComponent } from './page/live-borrowing/live-borrowing.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,10 @@ const routes: Routes = [
   {
     path:"borrow-books",
     component:BorrowBooksComponent
+  },
+  {
+    path:"live-borrowing",
+    component:LiveBorrowingComponent
   }
 ];
 

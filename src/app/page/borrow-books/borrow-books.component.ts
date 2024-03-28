@@ -102,15 +102,15 @@ export class BorrowBooksComponent implements OnInit {
 
             let isExists = true;
 
-            if(this.searchedBook.qty == 0){
+            if (this.searchedBook.qty == 0) {
 
-                Swal.fire({
-                  title: "Zero QTY ",
-                  html: `"${this.searchedBook.title}"Book Must be returned ! `,
-                  icon: "error"
-                });
-                return
-              
+              Swal.fire({
+                title: "Zero QTY ",
+                html: `"${this.searchedBook.title}"Book Must be returned ! `,
+                icon: "error"
+              });
+              return
+
             }
             if (this.cartList.length == 0) {
               this.cartList.push(this.searchedBook)
@@ -122,7 +122,7 @@ export class BorrowBooksComponent implements OnInit {
                 icon: "error"
               });
               return
-            }else {
+            } else {
               var i;
               for (i in this.cartList) {
                 if (this.cartList[i].id == this.searchedBook.id) {
@@ -188,7 +188,7 @@ export class BorrowBooksComponent implements OnInit {
   bookTitles: any = [];
   loadBookIds() {
     this.cartList.forEach((element: any) => {
-     
+
       this.bookTitles.push(element.title)
       this.bookIDs.push(element.id)
       element.qty--;
@@ -198,17 +198,17 @@ export class BorrowBooksComponent implements OnInit {
           console.log("Updated the qty ");
           console.log(data);
         })
-    
 
-    
-  });
+
+
+    });
   }
 
   borrowBooks() {
     this.loadBookIds();
 
-   
-  //-------------- call the confirmation to proceed the borrowing--------
+
+    //-------------- call the confirmation to proceed the borrowing--------
     const borrowBook: any = {
       borrowerID: this.user.id,
       borrowerName: this.user.userName,
@@ -217,6 +217,7 @@ export class BorrowBooksComponent implements OnInit {
       bookTitles: this.bookTitles,
       date: new Date().toISOString().split('T')[0],
       status: "borrowed",
+      returnedDate:"",
       fine: ""
 
     }
