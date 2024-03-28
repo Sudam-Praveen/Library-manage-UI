@@ -102,6 +102,16 @@ export class BorrowBooksComponent implements OnInit {
 
             let isExists = true;
 
+            if(this.searchedBook.qty == 0){
+
+                Swal.fire({
+                  title: "Zero QTY ",
+                  html: `"${this.searchedBook.title}"Book Must be returned ! `,
+                  icon: "error"
+                });
+                return
+              
+            }
             if (this.cartList.length == 0) {
               this.cartList.push(this.searchedBook)
             } else if (this.cartList.length == 2) {
@@ -112,7 +122,7 @@ export class BorrowBooksComponent implements OnInit {
                 icon: "error"
               });
               return
-            } else {
+            }else {
               var i;
               for (i in this.cartList) {
                 if (this.cartList[i].id == this.searchedBook.id) {
@@ -178,33 +188,27 @@ export class BorrowBooksComponent implements OnInit {
   bookTitles: any = [];
   loadBookIds() {
     this.cartList.forEach((element: any) => {
-      if (element.qty == 0) {
-        Swal.fire({
-          title: "Zero QTY ",
-          html: `Books Must be returned ! `,
-          icon: "error"
-        });
-      } else {
+     
+      this.bookTitles.push(element.title)
+      this.bookIDs.push(element.id)
+      element.qty--;
+      //--------reduce qty when borrowing
+      this.http.put("http://localhost:8080/book/update", element)
+        .subscribe(data => {
+          console.log("Updated the qty ");
+          console.log(data);
+        })
+    
 
-        this.bookTitles.push(element.title)
-        this.bookIDs.push(element.id)
-        element.qty--;
-        //--------reduce qty when borrowing
-        this.http.put("http://localhost:8080/book/update", element)
-          .subscribe(data => {
-            console.log("Update the qty- ");
-            console.log(data);
-
-          })
-      }
-    });
-    console.log("bookids - " + this.bookIDs)
-    console.log("booktitles - " + this.bookTitles)
+    
+  });
   }
 
   borrowBooks() {
-    this.loadBookIds()
+    this.loadBookIds();
 
+   
+  //-------------- call the confirmation to proceed the borrowing--------
     const borrowBook: any = {
       borrowerID: this.user.id,
       borrowerName: this.user.userName,
@@ -216,13 +220,34 @@ export class BorrowBooksComponent implements OnInit {
       fine: ""
 
     }
+    Swal.fire({
+      title: "Are you sure to Borrow these Books?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!"
+    }).then((result) => {
+      if (result.isConfirmed) {
 
-    console.log(borrowBook);
-    this.http.post("http://localhost:8082/borrow/add-borrow-details", borrowBook).subscribe(data => {
-      console.log(data);
-    })
+        console.log(borrowBook);
+        this.http.post("http://localhost:8082/borrow/add-borrow-details", borrowBook).subscribe(data => {
+          console.log(data);
+
+        })
+        Swal.fire({
+          title: "Completed!",
+          text: "Borrowing Transaction completed!",
+          html: "Books Must be returned within two weeks :)",
+          icon: "success"
+        });
+      }
+    });
+
 
   }
 
 }
+
 
