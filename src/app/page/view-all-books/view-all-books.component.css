@@ -1,7 +1,11 @@
 .make-up{
     margin-bottom: -20px;
 }
-.navbar-brand{
+.navbar-brand,h2{
     font-family:Georgia, 'Times New Roman', Times, serif;
     font-size:x-large;
+}
+.table-head{
+    font-family:Georgia, 'Times New Roman', Times, serif;
+    font-size:medium;
 }

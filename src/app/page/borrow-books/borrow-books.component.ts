@@ -158,6 +158,7 @@ export class BorrowBooksComponent implements OnInit {
   //-------------------borrow books------------
 
   bookIDs: any = [];
+  bookTitles:any=[];
   loadBookIds() {
     this.cartList.forEach((element: any) => {
       if (element.qty == 0) {
@@ -168,6 +169,7 @@ export class BorrowBooksComponent implements OnInit {
         });
       } else {
 
+        this.bookTitles.push(element.title)
         this.bookIDs.push(element.id)
         element.qty--;
         //--------reduce qty when borrowing
@@ -179,7 +181,8 @@ export class BorrowBooksComponent implements OnInit {
           })
       }
     });
-    console.log("bookids" + this.bookIDs)
+    console.log("bookids - " + this.bookIDs)
+    console.log("booktitles - " + this.bookTitles)
   }
 
   borrowBooks() {
@@ -187,9 +190,12 @@ export class BorrowBooksComponent implements OnInit {
 
     const borrowBook: any = {
       borrowerID: this.user.id,
+      borrowerName:this.user.userName,
+      borrowerEmail:this.user.email,
       books: this.bookIDs,
+      bookTitles:this.bookTitles,
       date: new Date().toISOString().split('T')[0],
-      fine: "",
+     
     }
 
     console.log(borrowBook);
