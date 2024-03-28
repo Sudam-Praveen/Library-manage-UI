@@ -17,7 +17,7 @@ export class BorrowBooksComponent implements OnInit {
 
   public newSearchedBook: any = {}
 
-  public bookQty: any = 1;
+  public isExistsInBorrowedList: any = "";
 
 
 
@@ -37,25 +37,42 @@ export class BorrowBooksComponent implements OnInit {
         icon: "error"
       });
     } else {
-      console.log(this.userName)
-      this.http.get(`http://localhost:8081/borrower/find-UserName/${this.userName}`).subscribe(data => {
-        console.log(data);
 
-        if (data == null) {
+      //-------------first checking that borrower already borrowed the books-------
+      this.http.get(`http://localhost:8082/borrow/find-exists-in-borrowedList/${this.userName}`).subscribe(data => {
+        console.log(data);
+        this.isExistsInBorrowedList = data;
+        if (this.isExistsInBorrowedList == true) {
+          console.log("exists");
           Swal.fire({
-            title: "Invalid User Name ",
-            html: `Check and Re-enter Borrower's <b>username<b>!`,
+            title: "This user has Borrowed Books",
+            html: `Please Return the books for New Borrowing!`,
             icon: "error"
           });
+          return
         } else {
-          this.user = data;
-          this.userName = ''
+          //--------------if not borrowed he can get the books---------
+          console.log("not exists");
+          console.log(this.userName)
+          this.http.get(`http://localhost:8081/borrower/find-UserName/${this.userName}`).subscribe(data => {
+            console.log(data);
+
+            if (data == null) {
+              Swal.fire({
+                title: "Invalid User Name ",
+                html: `Check and Re-enter Borrower's <b>username<b>!`,
+                icon: "error"
+              });
+            } else {
+              this.user = data;
+              this.userName = ''
+            }
+
+          })
         }
-
-      })
+      });
+      this.isExistsInBorrowedList = ''
     }
-
-
   }
 
 
@@ -90,7 +107,7 @@ export class BorrowBooksComponent implements OnInit {
             } else if (this.cartList.length == 2) {
 
               Swal.fire({
-                title: "Two-Book Limit ",
+                title: "Two-Book Limit ! ",
                 html: `You can only borrow two books!`,
                 icon: "error"
               });
@@ -158,7 +175,7 @@ export class BorrowBooksComponent implements OnInit {
   //-------------------borrow books------------
 
   bookIDs: any = [];
-  bookTitles:any=[];
+  bookTitles: any = [];
   loadBookIds() {
     this.cartList.forEach((element: any) => {
       if (element.qty == 0) {
@@ -190,12 +207,14 @@ export class BorrowBooksComponent implements OnInit {
 
     const borrowBook: any = {
       borrowerID: this.user.id,
-      borrowerName:this.user.userName,
-      borrowerEmail:this.user.email,
+      borrowerName: this.user.userName,
+      borrowerEmail: this.user.email,
       books: this.bookIDs,
-      bookTitles:this.bookTitles,
+      bookTitles: this.bookTitles,
       date: new Date().toISOString().split('T')[0],
-     
+      status: "borrowed",
+      fine: ""
+
     }
 
     console.log(borrowBook);
