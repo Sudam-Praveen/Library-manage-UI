@@ -82,24 +82,42 @@ export class BorrowBooksComponent implements OnInit {
         }).then((result) => {
           /* Read more about isConfirmed, isDenied below */
           if (result.isConfirmed) {
+
             let isExists = true;
 
             if (this.cartList.length == 0) {
               this.cartList.push(this.searchedBook)
+            } else if (this.cartList.length == 2) {
+
+              Swal.fire({
+                title: "Two-Book Limit ",
+                html: `You can only borrow two books!`,
+                icon: "error"
+              });
+              return
             } else {
               var i;
               for (i in this.cartList) {
                 if (this.cartList[i].id == this.searchedBook.id) {
-                  this.cartList[i].qty++;
+
+                  Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `The book "${this.cartList[i].title}" is already added!`,
+                    showConfirmButton: false,
+                    timer: 2500
+                  });
+
                   console.log("exists")
                   return
+
                 } else {
                   isExists = false
                   console.log("not Exists")
                 }
               }
             }
-            if (isExists == false) {
+            if (isExists == false && this.cartList.length < 2) {
               this.cartList.push(this.searchedBook);
             }
             this.searchedBook = null;
@@ -131,7 +149,9 @@ export class BorrowBooksComponent implements OnInit {
     const indexNum = this.cartList.findIndex((item: any) => item.id === id);
     console.log(indexNum)
     this.cartList.splice(indexNum, 1);
+    console.log("Delete from the cart - ");
     console.log(this.cartList);
+
 
   }
 
@@ -153,11 +173,13 @@ export class BorrowBooksComponent implements OnInit {
         //--------reduce qty when borrowing
         this.http.put("http://localhost:8080/book/update", element)
           .subscribe(data => {
+            console.log("Update the qty- ");
             console.log(data);
+
           })
       }
     });
-    console.log("bookids"+this.bookIDs)
+    console.log("bookids" + this.bookIDs)
   }
 
   borrowBooks() {
