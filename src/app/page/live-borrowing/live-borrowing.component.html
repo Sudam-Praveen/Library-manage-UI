@@ -26,7 +26,7 @@
                 <td>{{borrowerDetail.books}}<br></td>
                 <td>{{borrowerDetail.bookTitles}}</td>
                 <td>{{borrowerDetail.date}}</td>
-                <td><input [(ngModel)]="this.borrowerDetail.returnedDate" type="text" placeholder="Enter date YYYY-MM-DD"></td>
+                <td><input [(ngModel)]="this.borrowerDetail.returnedDate" type="text" placeholder=" yyyy-mm-dd" style="width: 150px;"></td>
                 <td><button [disabled]="this.borrowerDetail.returnedDate==null || this.borrowerDetail.returnedDate==''" (click)="returnBooks(borrowerDetail)" class="btn btn-primary">Return</button></td>
 
             </tr>
