@@ -7,6 +7,7 @@ import { ViewAllBorrowersComponent } from './page/view-all-borrowers/view-all-bo
 import { HomeComponent } from './page/home/home.component';
 import { BorrowBooksComponent } from './page/borrow-books/borrow-books.component';
 import { LiveBorrowingComponent } from './page/live-borrowing/live-borrowing.component';
+import { ReturnedDetailsComponent } from './page/returned-details/returned-details.component';
 
 const routes: Routes = [
   {
@@ -41,6 +42,10 @@ const routes: Routes = [
   {
     path:"live-borrowing",
     component:LiveBorrowingComponent
+  },
+  {
+    path:"returned-details",
+    component:ReturnedDetailsComponent
   }
 ];
 
