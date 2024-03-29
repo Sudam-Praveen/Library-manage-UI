@@ -13,6 +13,7 @@ import { ViewAllBorrowersComponent } from './page/view-all-borrowers/view-all-bo
 import { HomeComponent } from './page/home/home.component';
 import { BorrowBooksComponent } from './page/borrow-books/borrow-books.component';
 import { LiveBorrowingComponent } from './page/live-borrowing/live-borrowing.component';
+import { ReturnedDetailsComponent } from './page/returned-details/returned-details.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { LiveBorrowingComponent } from './page/live-borrowing/live-borrowing.com
     ViewAllBorrowersComponent,
     HomeComponent,
     BorrowBooksComponent,
-    LiveBorrowingComponent
+    LiveBorrowingComponent,
+    ReturnedDetailsComponent
   ],
   imports: [
     BrowserModule,
