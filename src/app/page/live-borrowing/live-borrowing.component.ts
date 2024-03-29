@@ -132,4 +132,32 @@ export class LiveBorrowingComponent implements OnInit {
       })
     }
   }
+
+
+
+  //-------------------Search Details-------------------------
+  public searchDetails(key: string){
+    console.log(key);
+    const results: any[] = [];
+    for (const borrowerBook of this.allBorrowedDetails) {
+      // Check if borrowerName or borrowerID matches the key
+      if (borrowerBook.borrowerName.toLowerCase().indexOf(key.toLowerCase()) !== -1
+        || (borrowerBook.borrowerID && typeof borrowerBook.borrowerID === 'string' && borrowerBook.borrowerID.toLowerCase().indexOf(key.toLowerCase()) !== -1)) {
+        results.push(borrowerBook);
+      } else {
+        // Check if any book title matches the key
+        for (const title of borrowerBook.bookTitles) {
+          if (title.toLowerCase().indexOf(key.toLowerCase()) !== -1) {
+            results.push(borrowerBook);
+            break; // Break out of the loop if a match is found for this borrowerBook
+          }
+        }
+      }
+    }
+    this.allBorrowedDetails = results;
+    if (results.length === 0 || !key) {
+      this.loadBorrowedDetails();
+    }
+  }
+  
 }
