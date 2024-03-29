@@ -243,6 +243,12 @@ export class BorrowBooksComponent implements OnInit {
           html: "Books Must be returned within two weeks :)",
           icon: "success"
         });
+
+        this.userName = '';
+        this.user = null;
+        this.bookId = '';
+        this.searchedBook = {};
+        this.cartList = [];
       }
     });
 

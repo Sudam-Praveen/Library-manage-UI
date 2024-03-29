@@ -11,14 +11,14 @@ import AOS from 'aos'
 export class LiveBorrowingComponent implements OnInit {
 
   private http;
-  public allBorrowedDetails: any;
+  public allBorrowedDetails: any=[];
   public returnedDate: any = "";
   public selectedDetailObject: any;
   public fineValue: any;
   constructor(httpClient: HttpClient) {
     this.http = httpClient;
   }
-  ngOnInit(): void {
+  ngOnInit() {
     this.loadBorrowedDetails();
   }
   loadBorrowedDetails() {
@@ -27,6 +27,7 @@ export class LiveBorrowingComponent implements OnInit {
       this.allBorrowedDetails = data;
     })
   }
+
 
   updateQty(book: any) {
     book.qty++;
@@ -87,11 +88,11 @@ export class LiveBorrowingComponent implements OnInit {
               this.increaseBookQty();
               this.http.post("http://localhost:8082/borrow/add-borrow-details", this.selectedDetailObject).subscribe(data => {
                 console.log(data);
-
+                this.loadBorrowedDetails()
               })
-
+             
               Swal.fire("Book(s) Returned !", "", "success");
-              this.loadBorrowedDetails();
+              this.selectedDetailObject.returnedDate = ""
 
 
             } else if (result.isDenied) {
@@ -115,11 +116,11 @@ export class LiveBorrowingComponent implements OnInit {
               this.increaseBookQty()
               this.http.post("http://localhost:8082/borrow/add-borrow-details", this.selectedDetailObject).subscribe(data => {
                 console.log(data);
-
+                this.loadBorrowedDetails()
               })
-
+             
               Swal.fire("Book(s) Returned !", "", "success");
-              this.loadBorrowedDetails();
+              this.selectedDetailObject.returnedDate = ""
 
             } else if (result.isDenied) {
               Swal.fire("Changes are not saved", "", "info");
