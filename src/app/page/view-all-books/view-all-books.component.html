@@ -1,7 +1,7 @@
 
 <app-nav></app-nav>
 
-<nav class="navbar navbar-expand-lg navbar-dark container col-11"  style="background-color: #12620c;">
+<nav class="navbar navbar-expand-lg navbar-dark container col-11 border shadow"  style="background-color: #12620c;">
    
     <a class="navbar-brand text-center mx-auto" style="color:white; ">Manage Books</a>
 
@@ -14,7 +14,7 @@
         
         <form class="form-inline py-4 col-10" style="margin-top: 9px;">
             <input type="search" (ngModelChange)="searchBook(key.value)" #key="ngModel" ngModel name="key"
-                id="searchName" class="form-control mr-sm-2" placeholder="Search books..." required>
+                id="searchName" class="form-control mr-sm-2 " placeholder="Search books..." required>
         </form>
         <div class="col-2 ">
            <abbr title="Add a new Book"> <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn mb-4 "> <img class="d-block "
@@ -23,8 +23,8 @@
         </div>
     </div>
     <h2>All Books</h2>
-    <table class="table table-striped table-sm"  *ngIf="bookList">
-        <thead class="table-head">
+    <table class="table table-striped table-sm border shadow "  *ngIf="bookList">
+        <thead class="table-head ">
             <tr>
                 <th scope="col">Book Id</th>
                 <th scope="col">ISBN</th>

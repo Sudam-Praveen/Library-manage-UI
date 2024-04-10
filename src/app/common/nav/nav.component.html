@@ -1,23 +1,32 @@
-<div class="container-fluid position-sticky top-0 bg-blur">
-  <header class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
+
+<!-- container-fluid position-sticky top-0 bg-blur  -->
+<div class="container container-fluid sticky-top bg-blur  ">
+
+  <header
+    class="d-flex flex-wrap align-items-center justify-content-center justify-content-md-between py-3 mb-4 border-bottom">
     <div class="col-md-3 mb-2 mb-md-0">
+
       <a href="/" class="d-inline-flex link-body-emphasis text-decoration-none">
-        <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg>
+        <svg class="bi" width="40" height="32" role="img" aria-label="Bootstrap">
+          <use xlink:href="#bootstrap" />
+        </svg> <img class="" style="height: 100px; width: 100px;" src="../../../assets/icon-library.png" />
+        <span class="navbar " style="margin-left: 10px; font-size:x-large; color:#12620c;">Book Mate Library</span>
       </a>
+
     </div>
 
-    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0">
+    <ul class="nav col-12 col-md-auto mb-2 justify-content-center mb-md-0 ">
       <li><a [routerLink]="['/home']" class="nav-link px-2 ">Home</a></li>
-      <li><a [routerLink]="['/view-all-books']" class="nav-link px-2">All Books</a></li>
-      <li><a [routerLink]="['/view-all-borrowers']" class="nav-link px-2">All Borrowers</a></li>
+      <li><a [routerLink]="['/view-all-books']" class="nav-link px-2 ">All Books</a></li>
+      <li><a [routerLink]="['/view-all-borrowers']" class="nav-link px-2 ">All Borrowers</a></li>
       <li><a [routerLink]="['/borrow-books']" class="nav-link px-2">Borrow Book</a></li>
-      <li><a [routerLink]="['/live-borrowing']" class="nav-link px-2">Live Borrowing</a></li>
-      <li><a [routerLink]="['/returned-details']" class="nav-link px-2">Returned Details</a></li>
+      <li><a [routerLink]="['/live-borrowing']" class="nav-link px-2 ">Live Borrowing</a></li>
+      <li><a [routerLink]="['/returned-details']" class="nav-link px-2 ">Returned Details</a></li>
     </ul>
 
     <div class="col-md-3 text-end">
-      <button  routerLink="" type="button" class="btn btn-outline-primary me-2">Log Out</button>
-   
+      <button routerLink="" type="button" class="btn btn-outline-primary me-2 ">Log Out</button>
+
     </div>
   </header>
 </div>

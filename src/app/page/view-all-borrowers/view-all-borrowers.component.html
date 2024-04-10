@@ -1,6 +1,6 @@
 
 <app-nav></app-nav>
-<nav class="navbar navbar-expand-lg navbar-dark container col-11" style="background-color: #12620c;">
+<nav class="navbar navbar-expand-lg navbar-dark container col-11 border shadow" style="background-color: #12620c;">
 
     <a class="navbar-brand text-center mx-auto" style="color:white; ">Manage Borrowers</a>
 
@@ -11,17 +11,18 @@
 
         <form class="form-inline py-4 col-10" style="margin-top: 9px;">
             <input type="search" (ngModelChange)="searchBorrowers(key.value)" #key="ngModel" ngModel name="key"
-                id="searchName" class="form-control mr-sm-2" placeholder="Search borrower..." required>
+                id="searchName" class="form-control mr-sm-2 mt-3" placeholder="Search borrower..." required>
         </form>
         <div class="col-2">
-            <abbr title ='Register new borrower'><button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn mb-4 "> <img class="d-block "
+            <abbr title ='Register new borrower'><button data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn mb-4 "> <img class="d-block mt-3"
                 src="../../../assets/addperson.jpg" alt="" width="90" height="90"></button></abbr>
 
         </div>
     </div>
 
-    <h2>All Borrowers</h2>
-    <table class="table table-striped table-sm ">
+   <div class="">
+    <h2 >All Borrowers</h2>
+    <table class="table table-striped table-sm border shadow mt-3">
         <thead class="table-head">
             <tr>
                 <th scope="col">Reg No</th>
@@ -59,6 +60,7 @@
 
         </tbody>
     </table>
+   </div>
 </div>
 
 
