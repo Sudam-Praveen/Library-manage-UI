@@ -128,7 +128,6 @@ export class BorrowBooksComponent implements OnInit {
                 if (this.cartList[i].id == this.searchedBook.id) {
 
                   Swal.fire({
-                    position: "top-end",
                     icon: "success",
                     title: `The book "${this.cartList[i].title}" is already added!`,
                     showConfirmButton: false,
